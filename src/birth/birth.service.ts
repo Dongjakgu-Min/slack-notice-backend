@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { Prisma } from '@prisma/client';
-import { Birth } from './entities/birth.entity';
 
 @Injectable()
 export class BirthService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: Prisma.BirthdayCreateInput): Promise<Birth> {
+  async create(data: Prisma.BirthdayCreateInput) {
     return this.prisma.birthday.create({
       data: { ...data, birthday: new Date(data.birthday) },
     });
@@ -37,7 +36,10 @@ export class BirthService {
     });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} birth`;
+  async remove(id: number) {
+    return this.prisma.birthday.update({
+      data: { isDeleted: true },
+      where: { id: +id },
+    });
   }
 }

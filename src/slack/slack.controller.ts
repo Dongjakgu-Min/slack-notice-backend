@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { SlackService } from './slack.service';
 import { CreateSlackDto } from './dto/create-slack.dto';
 import { UpdateSlackDto } from './dto/update-slack.dto';

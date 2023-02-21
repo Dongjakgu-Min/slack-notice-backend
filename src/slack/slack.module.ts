@@ -4,6 +4,6 @@ import { SlackController } from './slack.controller';
 
 @Module({
   controllers: [SlackController],
-  providers: [SlackService]
+  providers: [SlackService],
 })
 export class SlackModule {}

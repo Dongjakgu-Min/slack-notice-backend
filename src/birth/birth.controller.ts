@@ -1,8 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { BirthService } from './birth.service';
-import { CreateBirthDto } from './dto/create-birth.dto';
-import { UpdateBirthDto } from './dto/update-birth.dto';
-import { Prisma } from "@prisma/client";
+import { Prisma } from '@prisma/client';
 
 @Controller('birth')
 export class BirthController {
@@ -20,16 +26,19 @@ export class BirthController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return;
+    return this.birthService.findOne({ id: +id });
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBirthDto: UpdateBirthDto) {
-    return;
+  update(
+    @Param('id') id: string,
+    @Body() updateBirthDto: Prisma.BirthdayUpdateInput,
+  ) {
+    return this.birthService.update({ id: +id }, updateBirthDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return;
+    return this.birthService.remove(+id);
   }
 }
