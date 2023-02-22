@@ -58,6 +58,14 @@ $ yarn run test:e2e
 $ yarn run test:cov
 ```
 
+## 사용 방법
+Synology에서 사용을 가정
+### 필요 환경변수
+- DATABASE_URL
+- SHADOW_DATABASE_URL (Prisma에 대해 잘 몰라서 왜 있는지는 잘 모르겠음)
+- CHANNEL_NAME
+- SLACK_TOKEN
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
