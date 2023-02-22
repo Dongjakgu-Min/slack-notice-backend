@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { BirthService } from './birth.service';
 import { Prisma } from '@prisma/client';
@@ -20,8 +21,10 @@ export class BirthController {
   }
 
   @Get()
-  findAll() {
-    return this.birthService.findAll();
+  findAll(@Query('day') day: string) {
+    return day
+      ? this.birthService.findAllByDate(new Date(day))
+      : this.birthService.findAll();
   }
 
   @Get(':id')

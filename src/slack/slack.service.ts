@@ -36,11 +36,13 @@ export class SlackService {
     timeZone: 'Asia/Seoul',
   })
   async notice() {
-    const day = await this.prisma.birthday.findMany({
-      where: {
-        birthday: new Date(),
-      },
-    });
+    const today = new Date();
+    const day: any = await this.prisma
+      .$queryRaw`SELECT * FROM birthday WHERE (DATE_FORMAT(birthday, '%m')=${(
+      '0' + (today.getMonth() + 1).toString()
+    ).slice(-2)} AND DATE_FORMAT(birthday, '%d')=${(
+      '0' + today.getDate().toString()
+    ).slice(-2)})`;
 
     for (const d of day) {
       await this.httpService.post(

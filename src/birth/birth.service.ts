@@ -26,6 +26,15 @@ export class BirthService {
     });
   }
 
+  async findAllByDate(date: Date) {
+    return this.prisma
+      .$queryRaw`SELECT * FROM birthday WHERE (DATE_FORMAT(birthday, '%m')=${(
+      '0' + (date.getMonth() + 1).toString()
+    ).slice(-2)} AND DATE_FORMAT(birthday, '%d')=${(
+      '0' + date.getDate().toString()
+    ).slice(-2)})`;
+  }
+
   async update(
     whereUniqueInput: Prisma.BirthdayWhereUniqueInput,
     updateData: Prisma.BirthdayUpdateInput,
