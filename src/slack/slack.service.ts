@@ -4,6 +4,7 @@ import { UpdateSlackDto } from './dto/update-slack.dto';
 import { Cron } from '@nestjs/schedule';
 import { PrismaService } from '../prisma.service';
 import { HttpService } from '@nestjs/axios';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class SlackService {
@@ -32,7 +33,7 @@ export class SlackService {
     return `This action removes a #${id} slack`;
   }
 
-  @Cron('0 0 11 * * *', {
+  @Cron('0 0 10 * * *', {
     timeZone: 'Asia/Seoul',
   })
   async notice() {
@@ -45,18 +46,24 @@ export class SlackService {
     ).slice(-2)})`;
 
     for (const d of day) {
-      await this.httpService.post(
-        'https://slack.com/api/chat.postMessage',
-        {
-          channel: process.env.CHANNEL_NAME,
-          text: `오늘은 ${d.name} 청년의 생일입니다. 모두 축하해주세요!`,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.SLACK_TOKEN}`,
+      const result = await firstValueFrom(
+        this.httpService.post(
+          'https://slack.com/api/chat.postMessage',
+          {
+            channel: process.env.CHANNEL_NAME,
+            text: `오늘은 ${d.name} 청년의 생일입니다. 모두 축하해주세요!`,
           },
-        },
+          {
+            headers: {
+              Authorization: `Bearer ${process.env.SLACK_TOKEN}`,
+            },
+          },
+        ),
       );
+
+      if (!result.data.ok) {
+        console.log('[ERR] Axios Error');
+      }
     }
   }
 }
