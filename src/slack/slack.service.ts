@@ -33,13 +33,13 @@ export class SlackService {
     return `This action removes a #${id} slack`;
   }
 
-  @Cron('0 0 10 * * *', {
+  @Cron('30 * * * * *', {
     timeZone: 'Asia/Seoul',
   })
   async notice() {
     const today = new Date();
     const day: any = await this.prisma
-      .$queryRaw`SELECT * FROM birthday WHERE (DATE_FORMAT(birthday, '%m')=${(
+      .$queryRaw`SELECT * FROM Birthday WHERE (DATE_FORMAT(birthday, '%m')=${(
       '0' + (today.getMonth() + 1).toString()
     ).slice(-2)} AND DATE_FORMAT(birthday, '%d')=${(
       '0' + today.getDate().toString()
