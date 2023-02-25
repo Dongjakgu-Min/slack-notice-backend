@@ -33,7 +33,7 @@ export class SlackService {
     return `This action removes a #${id} slack`;
   }
 
-  @Cron('30 * * * * *', {
+  @Cron('0 0 10 * * *', {
     timeZone: 'Asia/Seoul',
   })
   async notice() {
