@@ -61,10 +61,20 @@ $ yarn run test:cov
 ## 사용 방법
 Synology에서 사용을 가정
 ### 필요 환경변수
-- DATABASE_URL
+- DATABASE_URL (`mysql://username:password@localhost:3306/slack?schema=public` 이런식으로)
 - SHADOW_DATABASE_URL (Prisma에 대해 잘 몰라서 왜 있는지는 잘 모르겠음)
 - CHANNEL_NAME
 - SLACK_TOKEN
+
+### 설치 방법
+개인적인 사용 용도라 사용 방법이 복잡합니다. <br>
+Synology DSM 7 환경에서 사용하고 있으며 도커 이미지로 사용중입니다.
+1. 먼저 mysql 도커 이미지를 받습니다.
+2. 그리고 리포지토리에서 slack-notice 이미지를 찾아 다운로드 받습니다. (Docker Hub)
+3. mysql 컨테이너와 slack-notice 컨테이너를 연결합니다. (Synology Docker 내 네트워크 연결 기능이 있습니다.)
+4. 사용하시면 됩니다.
+
+### 제공하는 API
 
 ## Support
 
