@@ -1442,6 +1442,11 @@ asap@^2.0.0:
   resolved "https://registry.npmjs.org/asap/-/asap-2.0.6.tgz"
   integrity sha512-BSHWgDSAiKs50o2Re8ppvp3seVHXSRM44cdSsT9FfNEUUZLOGWVCsiWaRPWM1Znn+mqZ1OfVZ3z3DWEzSp7hRA==
 
+astronomia@^4.1.0:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/astronomia/-/astronomia-4.1.1.tgz#9ad4d3cd1dc8135b7c9e5cee37cb77160ee7af7f"
+  integrity sha512-TcJD9lUC5eAo0/Ji7rnQauX/yQbi0yZWM+JsNr77W3OA5fsrgvuFgubLMFwfw4VlZ29cu9dG/yfJbfvuTSftjg==
+
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz"
@@ -1912,6 +1917,13 @@ cross-spawn@^7.0.0, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
+
+date-chinese@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/date-chinese/-/date-chinese-2.1.4.tgz#f471af3b72525b6005a16ec4e544a53b28c8e656"
+  integrity sha512-WY+6+Qw92ZGWFvGtStmNQHEYpNa87b8IAQ5T8VKt4wqrn24lBXyyBnWI5jAIyy7h/KVwJZ06bD8l/b7yss82Ww==
+  dependencies:
+    astronomia "^4.1.0"
 
 debug@2.6.9:
   version "2.6.9"
