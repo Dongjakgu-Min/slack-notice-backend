@@ -3,6 +3,18 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "webpack": true
+  },
+  "projects": {
+    "slack": {
+      "type": "library",
+      "root": "libs/slack",
+      "entryFile": "index",
+      "sourceRoot": "libs/slack/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/slack/tsconfig.lib.json"
+      }
+    }
   }
 }

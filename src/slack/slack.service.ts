@@ -3,14 +3,16 @@ import { Cron } from '@nestjs/schedule';
 import { PrismaService } from '../prisma.service';
 import { HttpService } from '@nestjs/axios';
 import { CalendarKorean } from 'date-chinese';
-import { firstValueFrom } from 'rxjs';
+import { SlackService as SlackLibService } from '@lib/slack';
 
 @Injectable()
 export class SlackService {
   constructor(
     private prisma: PrismaService,
     private httpService: HttpService,
+    private slackLibService: SlackLibService,
   ) {}
+
   @Cron('0 0 10 * * *', {
     timeZone: 'Asia/Seoul',
   })
@@ -38,24 +40,10 @@ export class SlackService {
     const birthday = [...day, ...dayLunar];
 
     for (const d of birthday) {
-      const result = await firstValueFrom(
-        this.httpService.post(
-          'https://slack.com/api/chat.postMessage',
-          {
-            channel: process.env.CHANNEL_NAME,
-            text: `오늘은 ${d.name} 청년의 생일입니다. 모두 축하해주세요!`,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${process.env.SLACK_TOKEN}`,
-            },
-          },
-        ),
+      await this.slackLibService.sendMessage(
+        process.env.CHANNEL_NAME,
+        `오늘은 ${d.name} 청년의 생일입니다. 모두 축하해주세요!`,
       );
-
-      if (!result.data.ok) {
-        console.log('[ERR] Axios Error');
-      }
     }
   }
 }
